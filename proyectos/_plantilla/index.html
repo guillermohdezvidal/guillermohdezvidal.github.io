@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- PLANTILLA DE PROYECTO (panel). Copia esta carpeta a proyectos/<nombre-del-proyecto>/ y sigue LEEME.md.
+     data-carpeta debe coincidir con el nombre de la carpeta y con su entrada en assets/proyectos.js. -->
+<html lang="en" data-raiz="../../" data-titulo="doc.title" data-seccion="proyectos" data-carpeta="_plantilla">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try { if (localStorage.getItem("tema") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}</script>
+<meta name="robots" content="noindex"><!-- quítalo en la copia del proyecto real -->
+<title>Project title</title>
+<meta name="description" content="One-sentence description of the project for search engines and link previews.">
+<link rel="stylesheet" href="../../assets/estilo.css?v=30b1c125">
+</head>
+<body>
+<header id="cabecera"></header>
+
+<main class="tablero">
+  <p class="migas"><a href="../../index.html#proyectos" data-t="crumb"></a></p>
+  <div class="cabecera-proyecto">
+    <div class="titulos">
+      <p class="antetitulo" data-t="hero.kicker"></p>
+      <h1 data-t="hero.title"></h1>
+      <p class="subtitulo" data-t="hero.subtitle"></p>
+    </div>
+  </div>
+
+  <nav class="pestanas" aria-label="Dashboard">
+    <a href="#resumen" data-pestana="resumen" data-t="tab.resumen"></a>
+    <a href="#resultados" data-pestana="resultados" data-t="tab.resultados"></a>
+    <a href="#datos" data-pestana="datos" data-t="tab.datos"></a>
+    <a class="boton pequeno" href="articulo.pdf" target="_blank" rel="noopener" id="enlace-pdf" data-t="hero.pdf"></a>
+  </nav>
+
+  <details class="filtros-panel" id="filtros-panel" open></details>
+
+  <section data-panel="resumen" hidden>
+    <p class="intro" data-t="res.lead"></p>
+    <div class="kpis" id="kpis-resumen"></div>
+    <div class="tarjeta"><h3 data-t="res.chart.title"></h3><div class="grafica alta" id="g-curvas"></div><p class="nota" data-t="res.chart.note"></p></div>
+    <details class="tarjeta" style="margin-top:16px"><summary><b data-t="limits.title"></b></summary><div class="texto" data-t="limits.body"></div></details>
+    <details class="tarjeta" style="margin-top:12px"><summary><b data-t="about.title"></b></summary><div class="texto" data-t="about.body"></div></details>
+  </section>
+
+  <section data-panel="resultados" hidden>
+    <p class="intro" data-t="resu.lead"></p>
+    <div class="tarjeta"><h3 data-t="resu.chart.title"></h3><div class="grafica" id="g-mensual"></div><p class="nota" data-t="resu.chart.note"></p></div>
+  </section>
+
+  <section data-panel="datos" hidden>
+    <p class="intro" data-t="dat.lead"></p>
+    <div id="explorador"></div>
+  </section>
+</main>
+
+<footer id="pie"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-cartesian-dist-min@2.35.2/plotly-cartesian.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/sql-wasm.js"></script>
+<script src="../../assets/config.js?v=7755ca3a"></script>
+<script src="../../assets/textos.js?v=7cecc2b5"></script>
+<script src="../../assets/proyectos.js?v=a14cd73c"></script>
+<script src="textos.js?v=cfdc6680"></script>
+<script src="../../assets/sitio.js?v=67624159"></script>
+<script src="../../assets/graficas-comun.js?v=251ba31c"></script>
+<script src="../../assets/panel.js?v=85459b57"></script>
+<script src="../../assets/explorador-datos.js?v=89a55ef5"></script>
+<script src="tablero.js?v=d1a8afaa"></script>
+</body>
+</html>

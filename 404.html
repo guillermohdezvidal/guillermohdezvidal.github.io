@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found · Página no encontrada</title>
+<style>
+  :root { --fondo: #fbfaf7; --texto: #1d1d1f; --suave: #5d5d63; --acento: #0072B2; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --fondo: #15161a; --texto: #ececee; --suave: #a6a7ad; --acento: #56B4E9; color-scheme: dark; } }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 17px/1.6 Georgia, serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 64px 16px; }
+  h1 { font-size: 32px; margin: 0 0 8px; }
+  p { color: var(--suave); }
+  a { color: var(--acento); }
+</style>
+</head>
+<body>
+<main>
+  <h1>404</h1>
+  <p lang="en">This page does not exist. <a class="inicio" href="./">Go to the home page</a>.</p>
+  <p lang="es">Esta página no existe. <a class="inicio" href="./">Ir al inicio</a>.</p>
+</main>
+<script>
+  // GitHub Pages sirve esta página para cualquier ruta inexistente. El enlace apunta a la raíz del sitio;
+  // si la ruta está dentro de /proyectos/, a lo que hay antes (sirve también si la web está en una subcarpeta).
+  (function () {
+    var ruta = location.pathname, i = ruta.indexOf("/proyectos/");
+    var raiz = i >= 0 ? ruta.slice(0, i + 1) : "/";
+    document.querySelectorAll("a.inicio").forEach(function (a) { a.href = raiz; });
+  })();
+</script>
+</body>
+</html>

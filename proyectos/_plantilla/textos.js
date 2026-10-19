@@ -1,0 +1,38 @@
+// Textos del proyecto en inglés y español. Sustituye cada texto entre corchetes.
+// Puedes usar HTML sencillo (<p>, <b>, <i>, <ul><li>, <a href>) dentro de las comillas.
+window.TEXTOS_PAGINA = {
+  en: {
+    "doc.title": "[Short project title]",
+    "crumb": "← All projects",
+    "hero.kicker": "Research project · [topic] · [period]",
+    "hero.title": "[Question-style title of the project]",
+    "hero.subtitle": "[Subtitle]",
+    "hero.pdf": "Paper (PDF)",
+    "tab.resumen": "Summary", "tab.resultados": "Results", "tab.datos": "Data",
+    "res.lead": "[Two or three sentences: question, what was registered in advance, main result.] (The template shows example data.)",
+    "res.chart.title": "[Main chart]", "res.chart.note": "[How to read it.]",
+    "resu.lead": "[What this tab shows.]", "resu.chart.title": "Monthly return (%)", "resu.chart.note": "[How to read it.]",
+    "dat.lead": "The database behind every chart. Filter it, write SQL or download it.",
+    "limits.title": "Limitations", "limits.body": "<ul><li>[Limitation 1]</li><li>[Limitation 2]</li></ul>",
+    "about.title": "About this project",
+    "about.body": "<p><b>Transparency.</b> [Tools used and who made each decision.]</p><p class='aviso'><b>Not financial advice.</b> This project is for research and educational purposes only. It is not financial, investment, legal or tax advice.</p>",
+    "filter.range.all": "All", "ex.example": "Example",
+  },
+  es: {
+    "doc.title": "[Título corto del proyecto]",
+    "crumb": "← Todos los proyectos",
+    "hero.kicker": "Proyecto de investigación · [tema] · [periodo]",
+    "hero.title": "[Título en forma de pregunta]",
+    "hero.subtitle": "[Subtítulo]",
+    "hero.pdf": "Artículo (PDF)",
+    "tab.resumen": "Resumen", "tab.resultados": "Resultados", "tab.datos": "Datos",
+    "res.lead": "[Dos o tres frases: pregunta, qué se registró de antemano, resultado principal.] (La plantilla muestra datos de ejemplo.)",
+    "res.chart.title": "[Gráfica principal]", "res.chart.note": "[Cómo leerla.]",
+    "resu.lead": "[Qué muestra esta pestaña.]", "resu.chart.title": "Rentabilidad mensual (%)", "resu.chart.note": "[Cómo leerla.]",
+    "dat.lead": "La base de datos de la que salen todas las gráficas. Fíltrala, escribe SQL o descárgala.",
+    "limits.title": "Limitaciones", "limits.body": "<ul><li>[Limitación 1]</li><li>[Limitación 2]</li></ul>",
+    "about.title": "Sobre este proyecto",
+    "about.body": "<p><b>Transparencia.</b> [Herramientas usadas y quién tomó cada decisión.]</p><p class='aviso'><b>No es asesoramiento financiero.</b> Este proyecto tiene fines de investigación y divulgación. No es asesoramiento financiero, de inversión, legal ni fiscal.</p>",
+    "filter.range.all": "Todo", "ex.example": "Ejemplo",
+  },
+};

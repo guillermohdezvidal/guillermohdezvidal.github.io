@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-raiz="" data-titulo="home.title" data-seccion="proyectos">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try { if (localStorage.getItem("tema") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}</script>
+<title>Guillermo Hernández Vidal · Research</title>
+<meta name="description" content="Independent, pre-registered research in quantitative finance by Guillermo Hernández Vidal. Papers, interactive charts and in-browser data explorers.">
+<link rel="stylesheet" href="assets/estilo.css?v=30b1c125">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 24 L11 14 L17 19 L29 6' stroke='%230072B2' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+</head>
+<body>
+<header id="cabecera"></header>
+
+<main>
+  <section class="portada">
+    <p class="antetitulo" data-t="home.kicker"></p>
+    <h1 data-t="home.name"></h1>
+    <p class="subtitulo" data-t="home.tagline"></p>
+    <div data-t="home.bio"></div>
+  </section>
+
+  <section>
+    <h2 data-t="home.principles.title"></h2>
+    <ul class="principios">
+      <li data-t="home.principles.1"></li>
+      <li data-t="home.principles.2"></li>
+      <li data-t="home.principles.3"></li>
+      <li data-t="home.principles.4"></li>
+    </ul>
+  </section>
+
+  <section id="proyectos">
+    <h2 data-t="home.projects.title"></h2>
+    <div id="lista-proyectos"></div>
+  </section>
+
+  <section id="sobre-mi">
+    <h2 data-t="home.about.title"></h2>
+    <div data-t="home.about.body"></div>
+    <p class="contacto" id="contacto"></p>
+  </section>
+</main>
+
+<footer id="pie"></footer>
+
+<script src="assets/config.js?v=7755ca3a"></script>
+<script src="assets/textos.js?v=7cecc2b5"></script>
+<script src="assets/proyectos.js?v=a14cd73c"></script>
+<script src="assets/sitio.js?v=67624159"></script>
+<script>
+(function () {
+  "use strict";
+  const S = window.SITIO;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function pintarProyectos(l) {
+    const lista = document.getElementById("lista-proyectos");
+    lista.innerHTML = window.PROYECTOS.map(p => {
+      const base = "proyectos/" + p.carpeta + "/";
+      const fecha = new Date(p.fecha + "-01T12:00:00Z").toLocaleDateString(l === "es" ? "es-ES" : "en-GB", { month: "long", year: "numeric" });
+      const botones = [`<a class="boton pequeno" href="${base}index.html">${esc(S.t("home.project.read"))}</a>`];
+      if (p.enlaces.pdf) botones.push(`<a class="boton secundario pequeno" href="${base}${p.enlaces.pdf}">${esc(S.t("home.project.pdf"))}</a>`);
+      if (p.enlaces.datos) botones.push(`<a class="boton secundario pequeno" href="${base}${p.enlaces.datos}">${esc(S.t("home.project.data"))}</a>`);
+      if (p.enlaces.codigo) botones.push(`<a class="boton secundario pequeno" href="${esc(p.enlaces.codigo)}">${esc(S.t("home.project.code"))}</a>`);
+      return `<article class="proyecto"><span class="estado">${esc(p.estado[l])}</span> <span class="autor">${esc(fecha)}</span>` +
+        `<h3><a href="${base}index.html">${esc(p.titulo[l])}</a></h3><p>${esc(p.resumen[l])}</p>` +
+        `<ul class="etiquetas">${p.etiquetas[l].map(e => `<li>${esc(e)}</li>`).join("")}</ul>` +
+        `<p class="botones">${botones.join("")}</p></article>`;
+    }).join("");
+  }
+
+  function pintarContacto() {
+    const c = S.config, enlaces = [];
+    if (c.github) enlaces.push(`<a class="boton secundario pequeno" href="${esc(c.github)}">${esc(S.t("home.contact.github"))}</a>`);
+    if (c.linkedin) enlaces.push(`<a class="boton secundario pequeno" href="${esc(c.linkedin)}">${esc(S.t("home.contact.linkedin"))}</a>`);
+    if (c.correo) enlaces.push(`<a class="boton secundario pequeno" href="mailto:${esc(c.correo)}">${esc(S.t("home.contact.email"))}</a>`);
+    const el = document.getElementById("contacto");
+    el.innerHTML = enlaces.join("");
+    el.hidden = enlaces.length === 0;
+  }
+
+  S.alCambiarIdioma(l => { pintarProyectos(l); pintarContacto(); });
+  S.iniciar();
+})();
+</script>
+</body>
+</html>

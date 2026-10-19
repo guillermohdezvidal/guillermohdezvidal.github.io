@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-raiz="../../" data-titulo="doc.title" data-seccion="proyectos">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try { if (localStorage.getItem("tema") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}</script>
+<title>Statistical arbitrage for retail traders: a post-mortem</title>
+<meta name="description" content="Interactive dashboard: 16 pre-registered statistical-arbitrage tests on Kraken crypto perpetuals under MiFID II (2022–2026). Pairs trading, Avellaneda–Lee and funding carry — none passed, and why.">
+<meta property="og:title" content="Why can't retail traders do statistical arbitrage like quants?">
+<meta property="og:description" content="16 pre-registered tests on crypto perpetuals, an interactive dashboard and the full paper.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../../assets/estilo.css?v=30b1c125">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 24 L11 14 L17 19 L29 6' stroke='%2356B4E9' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+</head>
+<body>
+<header id="cabecera"></header>
+
+<main class="tablero">
+  <p class="migas"><a href="../../index.html#proyectos" data-t="crumb"></a></p>
+  <div class="cabecera-proyecto">
+    <div class="titulos">
+      <p class="antetitulo" data-t="hero.kicker"></p>
+      <h1 data-t="hero.title"></h1>
+      <p class="subtitulo" data-t="hero.subtitle"></p>
+    </div>
+  </div>
+
+  <nav class="pestanas" aria-label="Dashboard">
+    <a href="#resumen" data-pestana="resumen" data-t="tab.resumen"></a>
+    <a href="#pares" data-pestana="pares" data-t="tab.pares"></a>
+    <a href="#avellaneda-lee" data-pestana="avellaneda-lee" data-t="tab.al"></a>
+    <a href="#carry" data-pestana="carry" data-t="tab.carry"></a>
+    <a href="#comparativa" data-pestana="comparativa" data-t="tab.comparativa"></a>
+    <a href="#por-que-falla" data-pestana="por-que-falla" data-t="tab.porque"></a>
+    <a href="#universo" data-pestana="universo" data-t="tab.universo"></a>
+    <a href="#datos" data-pestana="datos" data-t="tab.datos"></a>
+    <a class="boton pequeno" href="articulo.pdf" target="_blank" rel="noopener" data-t="hero.pdf"></a>
+  </nav>
+
+  <details class="filtros-panel" id="filtros-panel" open></details>
+
+  <!-- RESUMEN -->
+  <section data-panel="resumen" hidden>
+    <p class="intro" data-t="res.lead"></p>
+    <div class="kpis" id="kpis-resumen"></div>
+    <div class="tarjeta">
+      <h3 data-t="res.curves.title"></h3>
+      <div class="chips" id="chips-curvas"></div>
+      <div class="grafica alta" id="g-res-curvas"></div>
+      <p class="nota" data-t="res.curves.note"></p>
+    </div>
+    <div class="rejilla dos" style="margin-top:16px">
+      <div class="tarjeta"><h3 data-t="res.why.title"></h3><div class="texto" data-t="res.why.body"></div></div>
+      <div class="tarjeta"><h3 data-t="res.method.title"></h3><div class="texto" data-t="res.method.body"></div></div>
+    </div>
+    <details class="tarjeta" style="margin-top:16px"><summary><b data-t="limits.title"></b></summary><div class="texto" data-t="limits.body"></div></details>
+    <details class="tarjeta" style="margin-top:12px"><summary><b data-t="conclusion.title"></b></summary><div class="texto" data-t="conclusion.body"></div></details>
+    <details class="tarjeta" style="margin-top:12px"><summary><b data-t="about.title"></b></summary><div class="texto" data-t="about.body"></div>
+      <p class="nota"><span data-t="generated"></span> <span id="fecha-generado"></span></p></details>
+  </section>
+
+  <!-- PARES -->
+  <section data-panel="pares" hidden>
+    <p class="intro" data-t="par.lead"></p>
+    <div class="kpis" id="kpis-pares"></div>
+    <div class="rejilla dos">
+      <div class="tarjeta"><h3 data-t="par.funnel.title"></h3><div class="grafica" id="g-par-embudo"></div><p class="nota" data-t="par.funnel.note"></p></div>
+      <div class="tarjeta"><h3 data-t="par.weeks.title"></h3><div class="grafica" id="g-par-semanas"></div><p class="nota" data-t="par.weeks.note"></p></div>
+    </div>
+    <div class="tarjeta" style="margin-top:16px"><h3 id="t-par-capital"></h3><div class="grafica alta" id="g-par-capital"></div><p class="nota" data-t="par.capital.note"></p></div>
+    <div class="tarjeta" style="margin-top:16px"><h3 id="t-par-ops"></h3><div class="grafica" id="g-par-ops"></div><p class="nota" data-t="par.trades.note"></p></div>
+    <div class="tarjeta" style="margin-top:16px"><h3 data-t="par.groups.title"></h3><div class="grafica alta" id="g-par-grupos"></div><p class="nota" data-t="par.groups.note"></p></div>
+  </section>
+
+  <!-- AVELLANEDA–LEE -->
+  <section data-panel="avellaneda-lee" hidden>
+    <p class="intro" data-t="al.lead"></p>
+    <div class="kpis" id="kpis-al"></div>
+    <div class="rejilla dos">
+      <div class="tarjeta"><h3 data-t="al.waterfall.title"></h3><div class="grafica" id="g-al-cascada"></div><p class="nota" id="n-al-cascada"></p></div>
+      <div class="tarjeta"><h3 data-t="al.dist.title"></h3><div class="grafica" id="g-al-dist"></div><p class="nota" data-t="al.dist.note"></p></div>
+    </div>
+    <div class="tarjeta" style="margin-top:16px"><h3 data-t="al.capital.title"></h3><div class="grafica alta" id="g-al-capital"></div><p class="nota" data-t="al.capital.note"></p></div>
+    <div class="tarjeta" style="margin-top:16px"><h3 data-t="al.reasons.title"></h3><div class="grafica baja" id="g-al-motivos"></div><p class="nota" data-t="al.reasons.note"></p></div>
+  </section>
+
+  <!-- CARRY -->
+  <section data-panel="carry" hidden>
+    <p class="intro" data-t="ca.lead"></p>
+    <div class="kpis" id="kpis-carry"></div>
+    <div class="rejilla dos">
+      <div class="tarjeta"><h3 data-t="ca.persist.title"></h3><div class="grafica" id="g-ca-persist"></div><p class="nota" data-t="ca.persist.note"></p></div>
+      <div class="tarjeta"><h3 data-t="ca.spread.title"></h3><div class="grafica" id="g-ca-difer"></div><p class="nota" data-t="ca.spread.note"></p></div>
+    </div>
+    <div class="tarjeta" style="margin-top:16px"><h3 data-t="ca.capital.title"></h3><div class="grafica alta" id="g-ca-capital"></div><p class="nota" data-t="ca.capital.note"></p></div>
+    <div class="rejilla dos" style="margin-top:16px">
+      <div class="tarjeta"><h3 data-t="ca.breakdown.title"></h3><div class="grafica" id="g-ca-desglose"></div><p class="nota" id="n-ca-desglose"></p></div>
+      <div class="tarjeta"><h3 data-t="ca.sides.title"></h3><div class="grafica" id="g-ca-caida"></div><p class="nota" data-t="ca.sides.note"></p></div>
+    </div>
+  </section>
+
+  <!-- COMPARATIVA -->
+  <section data-panel="comparativa" hidden>
+    <p class="intro" data-t="co.lead"></p>
+    <div class="tarjeta"><h3 data-t="co.scatter.title"></h3><div class="grafica" id="g-co-dispersion"></div><p class="nota" data-t="co.scatter.note"></p></div>
+    <div class="tarjeta" style="margin-top:16px"><h3 data-t="co.heat.title"></h3><div class="grafica alta" id="g-co-mensual"></div><p class="nota" data-t="co.heat.note"></p></div>
+    <h2 style="margin-top:28px" data-t="tests.title"></h2>
+    <div class="intro" data-t="tests.intro"></div>
+    <div class="tabla-envoltorio" style="margin-top:10px"><table id="tabla-pruebas"></table></div>
+    <p class="nota" data-t="tests.note"></p>
+  </section>
+
+  <!-- POR QUÉ FALLA -->
+  <section data-panel="por-que-falla" hidden>
+    <p class="intro" data-t="why.lead"></p>
+    <div class="rejilla dos">
+      <div class="tarjeta"><div class="texto" data-t="why.a"></div></div>
+      <div class="tarjeta"><div class="texto" data-t="why.b"></div><div class="grafica" id="g-pq-amplitud"></div></div>
+    </div>
+    <div class="rejilla dos" style="margin-top:16px">
+      <div class="tarjeta"><div class="texto" data-t="why.c"></div>
+        <div class="control"><label for="control-n" data-t="why.c.slider"></label><input type="range" id="control-n" min="1" max="30" value="1"><output id="valor-n">1</output></div>
+        <p class="lectura" id="lectura-n"></p><div class="grafica" id="g-pq-potencia"></div></div>
+      <div class="tarjeta"><div class="texto" data-t="why.d"></div>
+        <div class="control"><label for="control-c" data-t="why.d.slider"></label><input type="range" id="control-c" min="1" max="10" value="8"><output id="valor-c">0.08 %</output></div>
+        <p class="lectura" id="lectura-c"></p><div class="grafica" id="g-pq-prima"></div></div>
+    </div>
+  </section>
+
+  <!-- UNIVERSO -->
+  <section data-panel="universo" hidden>
+    <p class="intro" data-t="un.lead"></p>
+    <div class="kpis" id="kpis-universo"></div>
+    <div class="tarjeta"><h3 data-t="un.weeks.title"></h3><div class="grafica" id="g-un-semanas"></div><p class="nota" data-t="un.weeks.note"></p></div>
+    <div class="rejilla dos" style="margin-top:16px">
+      <div class="tarjeta"><h3 data-t="un.excl.title"></h3><div class="grafica" id="g-un-exclusiones"></div><p class="nota" data-t="un.excl.note"></p></div>
+      <div class="tarjeta"><h3 data-t="un.top.title"></h3><div class="grafica" id="g-un-top"></div><p class="nota" data-t="un.top.note"></p></div>
+    </div>
+  </section>
+
+  <!-- DATOS -->
+  <section data-panel="datos" hidden>
+    <p class="intro" data-t="dat.lead"></p>
+    <div id="explorador"></div>
+  </section>
+</main>
+
+<footer id="pie"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-cartesian-dist-min@2.35.2/plotly-cartesian.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sql.js@1.10.3/dist/sql-wasm.js"></script>
+<script src="../../assets/config.js?v=7755ca3a"></script>
+<script src="../../assets/textos.js?v=7cecc2b5"></script>
+<script src="../../assets/proyectos.js?v=a14cd73c"></script>
+<script src="textos.js?v=fadc37dc"></script>
+<script src="../../assets/sitio.js?v=67624159"></script>
+<script src="../../assets/graficas-comun.js?v=251ba31c"></script>
+<script src="../../assets/panel.js?v=85459b57"></script>
+<script src="../../assets/tabla-pruebas.js?v=5588b1f8"></script>
+<script src="../../assets/explorador-datos.js?v=89a55ef5"></script>
+<script src="tablero.js?v=359f92a3"></script>
+</body>
+</html>
