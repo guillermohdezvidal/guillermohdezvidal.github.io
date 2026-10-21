@@ -7,8 +7,8 @@
 You may share and adapt them for any purpose, including commercially, as long as you give appropriate credit, for
 example:
 
-> Hernández Vidal, G. (2026). *Why Can't Retail Traders Do Statistical Arbitrage Like Quants? A Mathematical
-> Post-Mortem on Crypto Perpetuals under MiFID II.* https://guillermohdezvidal.github.io
+> Hernández Vidal, G. (2026). *Same Models, Different Conditions: Why Quantitative Methods Need Not Deliver
+> Quantitative Results for a Retail Trader.* https://guillermohdezvidal.github.io
 
 **Not included:** prices or raw market data from any exchange; the databases contain only backtest results and
 weekly aggregated measures.

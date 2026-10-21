@@ -7,9 +7,9 @@ No server, no cookies, no analytics.
 
 ## Projects
 
-- **Why can't retail traders do statistical arbitrage like quants?** A mathematical post-mortem on crypto
-  perpetuals under MiFID II (2022–2026): 16 pre-registered tests of pairs trading, Avellaneda–Lee residuals and
-  funding carry. None passed; the dashboard shows why.
+- **Same models, different conditions.** Why a quant fund's methods need not give a retail trader its results:
+  16 pre-registered tests of pairs trading, Avellaneda–Lee residuals and funding carry on crypto perpetuals under
+  MiFID II (2022–2026). None passed; the dashboard and the paper show why.
   [Dashboard](https://guillermohdezvidal.github.io/proyectos/arbitraje-estadistico/) ·
   [Paper (PDF)](https://guillermohdezvidal.github.io/proyectos/arbitraje-estadistico/articulo.pdf)
 
